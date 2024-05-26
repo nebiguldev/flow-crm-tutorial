@@ -14,7 +14,7 @@ import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.RolesAllowed;
 
 import java.io.IOException;
-
+// merhaba cihan commit
 @Route(value = "qr-codes", layout = MainLayout.class)
 @PageTitle("QR Codes | Vaadin CRM")
 @RolesAllowed("ROLE_ADMIN")
