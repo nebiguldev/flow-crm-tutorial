@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web App Demo</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1, h2 {
+      color: #333;
+      text-align: center;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #5cb85c;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #4cae4c;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
+      background: #e9e9e9;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    ul li button {
+      margin-left: 10px;
+      background-color: #d9534f;
+    }
+    ul li button:hover {
+      background-color: #c9302c;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+    <h1>Web App Demo</h1>
+
+    <h2>Login</h2>
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
+    <button>Login</button>
+
+    <h2>Register</h2>
+    <input type="email" placeholder="Email">
+    <input type="password" placeholder="Password">
+    <select>
+        <option value="worker">Worker</option>
+        <option value="foreman">Foreman</option>
+    </select>
+    <button>Register</button>
+
+    <h2>Admin Dashboard</h2>
+    <ul>
+        <li>
+            user1@example.com - worker
+            <button>Approve</button>
+            <button>Reject</button>
+        </li>
+        <li>
+            user2@example.com - foreman
+            <button>Approve</button>
+            <button>Reject</button>
+        </li>
+    </ul>
+
+    <h2>Foreman Dashboard</h2>
+    <button>Generate QR Code</button>
+    <div>
+        <img src="https://via.placeholder.com/150" alt="QR Code">
+    </div>
+
+    <h2>Worker Dashboard</h2>
+    <button>Scan QR Code</button>
+    <ul>
+        <li>2023-05-26 08:00 - in</li>
+        <li>2023-05-26 17:00 - out</li>
+    </ul>
+</div>
+</body>
+</html>

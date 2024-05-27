@@ -27,6 +27,7 @@ public class ContactForm extends FormLayout {
   ComboBox<Status> status = new ComboBox<>("Status");
   ComboBox<Company> company = new ComboBox<>("Company");
 
+
   Button save = new Button("Save");
   Button delete = new Button("Delete");
   Button close = new Button("Cancel");

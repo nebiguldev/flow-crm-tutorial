@@ -2,6 +2,7 @@ package com.example.application.security;
 
 import com.example.application.views.LoginView;
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -30,15 +31,40 @@ public class SecurityConfig extends VaadinWebSecurity { // <2>
     public UserDetailsService users() {
         UserDetails user = User.builder()
                 .username("user")
-                // password = password with this hash, don't tell anybody :-)
                 .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
                 .roles("USER")
                 .build();
+
         UserDetails admin = User.builder()
                 .username("admin")
                 .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
                 .roles("USER", "ADMIN")
                 .build();
-        return new InMemoryUserDetailsManager(user, admin); // <5>
+
+        UserDetails foreman = User.builder()
+                .username("foreman")
+                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                .roles("USER", "FOREMAN")
+                .build();
+
+        return new InMemoryUserDetailsManager(user, admin, foreman);
     }
+/*
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    public void changePassword(String username, String newPassword) {
+        // Mevcut UserDetails objesini al
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+        // Yeni şifreyle yeni bir UserDetails objesi oluştur
+        UserDetails updatedUser = User.withUserDetails(userDetails)
+                .password(newPasswordEncoder().encode(newPassword)) // Yeni şifreyi şifreleyerek ayarla
+                .build();
+
+        // UserDetails objesini güncelle
+        ((InMemoryUserDetailsManager) userDetailsService).updateUser(updatedUser);
+    }
+    user forget password
+ */
 }

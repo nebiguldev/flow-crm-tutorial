@@ -12,7 +12,7 @@ import jakarta.annotation.security.RolesAllowed;
 
 @Route(value = "qr-admin", layout = MainLayout.class)
 @PageTitle("QR Codes Admin | Vaadin CRM")
-@RolesAllowed("ROLE_ADMIN")
+@RolesAllowed("foreman")
 public class QRCodeAdminView extends VerticalLayout {
 
     private final QRCodeService qrCodeService;
@@ -27,3 +27,4 @@ public class QRCodeAdminView extends VerticalLayout {
         add(qrCodeGrid);
     }
 }
+

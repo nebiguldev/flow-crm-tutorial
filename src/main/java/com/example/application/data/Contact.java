@@ -31,6 +31,10 @@ public class Contact extends AbstractEntity {
     @NotEmpty
     private String email = "";
 
+    // Kullanıcı rolü alanı
+    @NotEmpty
+    private String role = "Admin";
+
     @Override
     public String toString() {
         return firstName + " " + lastName;
@@ -75,4 +79,9 @@ public class Contact extends AbstractEntity {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getRole() {
+        return role;
+    }
+    public void setRole() {this.role=role;}
 }
