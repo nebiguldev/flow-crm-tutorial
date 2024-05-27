@@ -5,16 +5,17 @@ import com.example.application.qr.QRCodeGenerator;
 import com.example.application.services.ContactService;
 import com.example.application.services.QRCodeService;
 import com.google.zxing.WriterException;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.spring.security.AuthenticationContext;
 import jakarta.annotation.security.RolesAllowed;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.IOException;
-// merhaba cihan commit
+
 @Route(value = "qr-codes", layout = MainLayout.class)
 @PageTitle("QR Codes | Vaadin CRM")
 @RolesAllowed("ROLE_ADMIN")
@@ -22,23 +23,24 @@ public class QRCodeView extends VerticalLayout {
 
     private final QRCodeService qrCodeService;
     private final ContactService contactService;
+    private final AuthenticationContext authenticationContext;
     private Image qrCodeImage;
 
-    public QRCodeView(QRCodeService qrCodeService, ContactService contactService) {
+    public QRCodeView(QRCodeService qrCodeService, ContactService contactService, AuthenticationContext authenticationContext) {
         this.qrCodeService = qrCodeService;
         this.contactService = contactService;
+        this.authenticationContext = authenticationContext;
 
         qrCodeImage = new Image();
-        qrCodeImage.setVisible(false); // Başlangıçta görünmez
+        qrCodeImage.setVisible(true); // Başlangıçta görünür
+        add(qrCodeImage); // QR kodu görüntüleyiciyi ekle
 
-        Button generateQRCodeButton = new Button("Generate QR Code", event -> generateQRCode());
-        add(generateQRCodeButton, qrCodeImage);
+        generateQRCode(); // QR kodu oluştur ve göster
     }
-//TODO: rollere göre qr kod okuma yazma işlemi yapılacak
 
     private void generateQRCode() {
         try {
-            var currentUser = contactService.getCurrentUser();
+            var currentUser = authenticationContext.getAuthenticatedUser(UserDetails.class).get();
             if (currentUser == null) {
                 Notification.show("Current user not found. Please log in.");
                 return;
@@ -52,8 +54,7 @@ public class QRCodeView extends VerticalLayout {
             // QR kod bilgisini veritabanına kaydetme
             QRCodeEntity qrCodeEntity = new QRCodeEntity();
             qrCodeEntity.setLocation("Sample Location"); // Gerçek konum bilgisi ile değiştirin
-            qrCodeEntity.setCreatedBy(currentUser); // Şu anki admin kullanıcısını ayarlayın
-            qrCodeEntity.setCompany(currentUser.getCompany());
+
 
             qrCodeService.save(qrCodeEntity);
 
