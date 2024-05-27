@@ -18,7 +18,7 @@ import java.io.IOException;
 
 @Route(value = "qr-codes", layout = MainLayout.class)
 @PageTitle("QR Codes | Vaadin CRM")
-@RolesAllowed("ROLE_ADMIN")
+@RolesAllowed({"ROLE_FOREMAN", "ROLE_ADMIN"})
 public class QRCodeView extends VerticalLayout {
 
     private final QRCodeService qrCodeService;
@@ -39,8 +39,10 @@ public class QRCodeView extends VerticalLayout {
     }
 
     private void generateQRCode() {
+
         try {
             var currentUser = authenticationContext.getAuthenticatedUser(UserDetails.class).get();
+
             if (currentUser == null) {
                 Notification.show("Current user not found. Please log in.");
                 return;
