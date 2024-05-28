@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Uygulaması Veri Akış Diyagramı</title>
+</head>
+<body>
+    <h1>Web Uygulaması Veri Akış Diyagramı</h1>
+
+    <h2>Varlıklar</h2>
+    <ul>
+        <li>Kullanıcı (İşçi, Ustabaşı, Yönetici)</li>
+        <li>Sistem (Web Uygulaması)</li>
+        <li>Veritabanı (MongoDB)</li>
+    </ul>
+
+    <h2>İşlemler</h2>
+    <ul>
+        <li>Kullanıcı Kaydı</li>
+        <li>Kullanıcı Girişi</li>
+        <li>Rol Yönetimi (Yönetici)</li>
+        <li>Giriş/Çıkış (İşçi)</li>
+        <li>QR Kod Oluşturma (Ustabaşı)</li>
+        <li>Kullanıcı Yönetimi (Yönetici)</li>
+        <li>Giriş/Çıkış Kaydı Depolama (Sistem)</li>
+        <li>Kullanıcı Profili Yönetimi (İşçi)</li>
+    </ul>
+
+    <h2>Veri Akışları</h2>
+    <ul>
+        <li>Kullanıcı Kayıt Verileri (Kullanıcı -> Sistem)</li>
+        <li>Giriş Bilgileri (Kullanıcı -> Sistem)</li>
+        <li>Kullanıcı Rolü (Sistem -> Yönetici)</li>
+        <li>QR Kod (Sistem -> İşçi) (Sistem -> Ustabaşı)</li>
+        <li>Giriş/Çıkış Zamanı (İşçi -> Sistem)</li>
+        <li>Kullanıcı Bilgileri (Kullanıcı -> Sistem) (Sistem -> Kullanıcı)</li>
+        <li>Giriş/Çıkış Kaydı (Sistem -> Veritabanı)</li>
+    </ul>
+
+    <h2>Veri Deposu</h2>
+    <ul>
+        <li>Kullanıcı Verileri (Veritabanı)</li>
+        <li>Giriş/Çıkış Kayıtları (Veritabanı)</li>
+    </ul>
+
+    <div style="display: flex; flex-direction: column; align-items: center;">
+        <h2>Veri Akış Diyagramı (Seviye 0)</h2>
+        <img src="https://i.imgur.com/t88u49T.png" alt="Veri Akış Diyagramı (Seviye 0)">
+    </div>
+
+</body>
+</html>

@@ -31,9 +31,12 @@ public class Contact extends AbstractEntity {
     @NotEmpty
     private String email = "";
 
+    @NotNull
+    private String password = "";
+
     // Kullanıcı rolü alanı
-    @NotEmpty
-    private String role = "Admin";
+    @NotNull
+    private String role = "";
 
     @Override
     public String toString() {
@@ -80,8 +83,18 @@ public class Contact extends AbstractEntity {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getRole() {
         return role;
     }
-    public void setRole() {this.role=role;}
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
