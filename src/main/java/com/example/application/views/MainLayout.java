@@ -1,5 +1,6 @@
 package com.example.application.views;
 
+import com.example.application.qr.QRCodeScanView;
 import com.example.application.security.SecurityService;
 import com.example.application.views.list.ListView;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -47,7 +48,8 @@ public class MainLayout extends AppLayout {
         addToDrawer(new VerticalLayout(
                 new RouterLink("List", ListView.class),
                 new RouterLink("Dashboard", DashboardView.class),
-                new RouterLink("QR Codes", QRCodeView.class) // Yeni menü öğesi
+                new RouterLink("QR Codes", QRCodeView.class), // Yeni menü öğesi
+                new RouterLink("QR Scan", QRCodeScanView.class)
         ));
     }
 }

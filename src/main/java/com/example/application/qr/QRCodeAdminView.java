@@ -8,11 +8,12 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 import jakarta.annotation.security.RolesAllowed;
 
 @Route(value = "qr-admin", layout = MainLayout.class)
 @PageTitle("QR Codes Admin | Vaadin CRM")
-@RolesAllowed("foreman")
+@RolesAllowed({"ROLE_FOREMAN", "ROLE_ADMIN"})
 public class QRCodeAdminView extends VerticalLayout {
 
     private final QRCodeService qrCodeService;

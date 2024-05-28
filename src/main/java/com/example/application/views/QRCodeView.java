@@ -10,21 +10,25 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 import jakarta.annotation.security.RolesAllowed;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @Route(value = "qr-codes", layout = MainLayout.class)
 @PageTitle("QR Codes | Vaadin CRM")
 @RolesAllowed({"ROLE_FOREMAN", "ROLE_ADMIN"})
+// @AnonymousAllowed
 public class QRCodeView extends VerticalLayout {
 
     private final QRCodeService qrCodeService;
     private final ContactService contactService;
     private final AuthenticationContext authenticationContext;
     private Image qrCodeImage;
+
 
     public QRCodeView(QRCodeService qrCodeService, ContactService contactService, AuthenticationContext authenticationContext) {
         this.qrCodeService = qrCodeService;
@@ -41,8 +45,8 @@ public class QRCodeView extends VerticalLayout {
     private void generateQRCode() {
 
         try {
-            var currentUser = authenticationContext.getAuthenticatedUser(UserDetails.class).get();
-
+            var currentUser = contactService.getCurrentUser();
+            Notification.show(String.valueOf(currentUser));
             if (currentUser == null) {
                 Notification.show("Current user not found. Please log in.");
                 return;
@@ -55,8 +59,8 @@ public class QRCodeView extends VerticalLayout {
 
             // QR kod bilgisini veritabanına kaydetme
             QRCodeEntity qrCodeEntity = new QRCodeEntity();
-            qrCodeEntity.setLocation("Sample Location"); // Gerçek konum bilgisi ile değiştirin
-
+            qrCodeEntity.setLocation("text"); // Gerçek konum bilgisi ile değiştirin
+            qrCodeEntity.setScanDateTime(LocalDateTime.now());
 
             qrCodeService.save(qrCodeEntity);
 
